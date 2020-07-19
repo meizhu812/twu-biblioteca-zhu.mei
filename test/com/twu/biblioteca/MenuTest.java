@@ -13,7 +13,7 @@ public class MenuTest {
     }
 
     @Test
-    public void should_show_proper_output_when_listing_all_books() {
+    public void should_show_proper_output_when_listing_all_books() throws InvalidOption {
         menu.runOption("1");
     }
 

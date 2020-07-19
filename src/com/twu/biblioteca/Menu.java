@@ -18,9 +18,9 @@ public class Menu {
                 .collect(Collectors.toMap(Option::getSerial, Function.identity(), (a, b) -> b));
     }
 
-    void runOption(String input) {
+    void runOption(String input) throws InvalidOption {
         Optional.ofNullable(options.getOrDefault(input, null))
-                .get()
+                .orElseThrow(InvalidOption::new)
                 .getOperation()
                 .consoleExecute();
     }
