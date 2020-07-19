@@ -24,7 +24,11 @@ public final class Library {
     public Map<Book, Boolean> getStatusMap() {
         return statusMap;
     }
-    public List<Book> getAllBooks(){
-        return null;
+
+    public List<Book> getAllBooks() {
+        return statusMap.entrySet().stream()
+                .filter(Map.Entry::getValue)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }
