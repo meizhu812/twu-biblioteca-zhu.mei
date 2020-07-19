@@ -21,10 +21,6 @@ public final class Library {
                 .collect(Collectors.toMap(Function.identity(), book -> true, (a, b) -> a));
     }
 
-    public Map<Book, Boolean> getStatusMap() {
-        return statusMap;
-    }
-
     public List<Book> getAllBooks() {
         return statusMap.entrySet().stream()
                 .filter(Map.Entry::getValue)
