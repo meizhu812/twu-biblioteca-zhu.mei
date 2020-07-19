@@ -15,7 +15,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void test() {
-        assertEquals(1, 1);
+    public void should_get_all_books() {
+        assertEquals(library.getAllBooks().size(), 4);
     }
 }

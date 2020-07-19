@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,5 +23,8 @@ public final class Library {
 
     public Map<Book, Boolean> getStatusMap() {
         return statusMap;
+    }
+    public List<Book> getAllBooks(){
+        return null;
     }
 }
