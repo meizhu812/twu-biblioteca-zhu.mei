@@ -14,8 +14,8 @@ public class ListAll extends Operation<List<Book>> {
 
     @Override
     void consoleExecute(String... input) {
-        System.out.println("Listing all books in Biblioteca:");
-        System.out.println("Title | Author | Publish Year");
-        execute().forEach(book -> System.out.printf("%s | %s | %d\n", book.getTitle(), book.getAuthor(), book.getPubYear()));
+        System.out.println("= Listing all books in Biblioteca:");
+        System.out.println("= Title | Author | Publish Year");
+        execute().forEach(book -> System.out.printf("- %s | %s | %d\n", book.getTitle(), book.getAuthor(), book.getPubYear()));
     }
 }
