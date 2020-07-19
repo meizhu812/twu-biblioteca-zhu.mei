@@ -15,6 +15,10 @@ public class Menu {
     }
 
     void runOption(String input) {
+        Optional.ofNullable(options.getOrDefault(input, null))
+                .get()
+                .getOperation()
+                .consoleExecute();
     }
 }
 
