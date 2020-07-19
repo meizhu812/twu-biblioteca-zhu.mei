@@ -16,6 +16,7 @@ public class BibliotecaApp {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     private static void mainLoop() {
         while (true) {
             showMenu();
