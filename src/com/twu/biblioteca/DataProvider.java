@@ -16,7 +16,9 @@ public final class DataProvider {
         return new Library(Arrays.asList(books));
     }
 
-    public static List<Option<?>> getMenuOptions(Library library){
-        return Arrays.asList(new Option<>("1","List All Books",null, new ListAll(library)));
+    public static List<Option<?>> getMenuOptions(Library library) {
+        return Arrays.asList(
+                new Option<>("1", "List All Books", null, new ListAll(library)),
+                new Option<>("Q", "Quit", null, new Quit(library)));
     }
 }
