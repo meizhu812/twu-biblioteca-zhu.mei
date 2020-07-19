@@ -7,6 +7,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Menu {
+    public Map<String, Option<?>> getOptions() {
+        return options;
+    }
+
     private final Map<String, Option<?>> options;
 
     public Menu(Collection<Option<?>> options) {
