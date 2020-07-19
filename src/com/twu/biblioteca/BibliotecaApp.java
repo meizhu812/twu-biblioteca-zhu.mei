@@ -19,7 +19,11 @@ public class BibliotecaApp {
     private static void mainLoop() {
         while (true) {
             showMenu();
-            menu.runOption(sc.next());
+            try {
+                menu.runOption(sc.next());
+            } catch (InvalidOption e) {
+                System.out.println("Please select a valid option!");
+            }
         }
     }
 
