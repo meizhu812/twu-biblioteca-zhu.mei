@@ -37,7 +37,9 @@ public class MenuTest {
     @Test
     public void should_show_proper_output_when_checking_out_books() throws InvalidOption {
         String inputs = "Foundation\nThe Dark Forest\nFoundation\n";
-        menu.setScanner(new Scanner(inputs));
+        Scanner scanner = new Scanner(inputs);
+        scanner.useDelimiter("\n");
+        menu.setScanner(scanner);
         menu.runOption("2");
         menu.runOption("2");
         menu.runOption("2");

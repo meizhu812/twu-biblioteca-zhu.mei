@@ -33,7 +33,7 @@ public class Menu {
         String inputPrompt = option.getInputPrompt();
         if (inputPrompt != null) {
             System.out.println(inputPrompt);
-            operation.consoleExecute(scanner.nextLine());
+            operation.consoleExecute(scanner.next());
         } else {
             operation.consoleExecute();
         }
