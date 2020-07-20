@@ -10,6 +10,8 @@ public class ListAll extends Operation<List<Book>> {
         super(library);
     }
 
+    private static final String ENTRY_FORMAT = "- %-32s | %-16s | %16s\n";
+
     @Override
     List<Book> execute(String... input) {
         return library.getAllBooks();
@@ -18,7 +20,7 @@ public class ListAll extends Operation<List<Book>> {
     @Override
     public void consoleExecute(String... input) {
         System.out.println("= Listing all books in Biblioteca:");
-        System.out.println("= Title | Author | Publish Year");
-        execute().forEach(book -> System.out.printf("- %s | %s | %d\n", book.getTitle(), book.getAuthor(), book.getPubYear()));
+        System.out.printf(ENTRY_FORMAT,"-TITLE-","-AUTHOR-","-PUBLISH YEAR-");
+        execute().forEach(book -> System.out.printf(ENTRY_FORMAT, book.getTitle(), book.getAuthor(), book.getPubYear()));
     }
 }
