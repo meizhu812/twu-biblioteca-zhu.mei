@@ -8,12 +8,11 @@ public final class DataProvider {
     }
 
     public static Library provideLibrary() {
-        Book[] books = {
+        return new Library(Arrays.asList(
                 new Book("The Three-Body Problem", "Cixin Liu", 2014),
                 new Book("The Dark Forest", "Cixin Liu", 2016),
                 new Book("Death's End", "Cixin Liu", 2014),
-                new Book("Foundation", "Isaac Asimov", 2004)};
-        return new Library(Arrays.asList(books));
+                new Book("Foundation", "Isaac Asimov", 2004)));
     }
 
     public static List<Option<?>> provideOptions(Library library) {
