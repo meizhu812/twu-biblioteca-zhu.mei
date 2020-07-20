@@ -36,12 +36,31 @@ public class MenuTest {
 
     @Test
     public void should_show_proper_output_when_checking_out_books() throws InvalidOption {
-        String inputs = "Foundation\nThe Dark Forest\nFoundation\n";
+        String inputs = "Foundation\nThe Dark Forest\nFoundation\nWar and Peace\n";
         Scanner scanner = new Scanner(inputs);
         scanner.useDelimiter("\n");
         menu.setScanner(scanner);
         menu.runOption("2");
         menu.runOption("2");
         menu.runOption("2");
+        menu.runOption("2");
+    }
+
+    @Test
+    public void should_show_proper_output_when_returning_books() throws InvalidOption {
+        String inputs
+                = "Foundation\n"
+                + "Foundation\n"
+                + "Foundation\n"
+                + "Foundation\n"
+                + "The Dart Forest\n";
+        Scanner scanner = new Scanner(inputs);
+        scanner.useDelimiter("\n");
+        menu.setScanner(scanner);
+        menu.runOption("2");
+        menu.runOption("3");
+        menu.runOption("3");
+        menu.runOption("2");
+        menu.runOption("3");
     }
 }
