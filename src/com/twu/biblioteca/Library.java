@@ -12,14 +12,14 @@ public final class Library {
     private Map<Book, Boolean> statusMap;
 
     public Library(Collection<Book> initBooks) {
-        this.titleMap = initBooks.stream()
-                .collect(Collectors.toMap(Book::getTitle, Function.identity(), (a, b) -> a));
+        this.titleMap = initBooks.stream().collect(
+                Collectors.toMap(Book::getTitle, Function.identity(), (a, b) -> a));
         init();
     }
 
     public void init() {
-        this.statusMap = this.titleMap.values().stream()
-                .collect(Collectors.toMap(Function.identity(), book -> true, (a, b) -> a));
+        this.statusMap = this.titleMap.values().stream().collect(
+                Collectors.toMap(Function.identity(), book -> true, (a, b) -> a));
     }
 
     public List<Book> getAllBooks() {

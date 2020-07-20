@@ -12,8 +12,8 @@ public class Menu {
     private Scanner scanner;
 
     public Menu(Collection<Option<?>> options, Scanner scanner) {
-        this.options = options.stream()
-                .collect(Collectors.toMap(Option::getSerial, Function.identity(), (a, b) -> b));
+        this.options = options.stream().collect(
+                Collectors.toMap(Option::getSerial, Function.identity(), (a, b) -> b));
         setScanner(scanner);
     }
 

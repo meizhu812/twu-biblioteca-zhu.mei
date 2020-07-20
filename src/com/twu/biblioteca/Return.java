@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Return<R> extends Operation<Boolean> {
+public class Return extends Operation<Boolean> {
     public Return(Library library) {
         super(library);
     }

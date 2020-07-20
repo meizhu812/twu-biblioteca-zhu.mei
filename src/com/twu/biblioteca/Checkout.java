@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Checkout<R> extends Operation<Boolean> {
+public class Checkout extends Operation<Boolean> {
     public Checkout(Library library) {
         super(library);
     }
