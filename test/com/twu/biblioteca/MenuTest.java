@@ -4,12 +4,14 @@ import org.junit.Before;
 
 import org.junit.Test;
 
+import java.util.Scanner;
+
 public class MenuTest {
     private Menu menu;
 
     @Before
     public void setUp() {
-        menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()));
+        menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()), new Scanner(System.in));
     }
 
     @Test
@@ -30,5 +32,14 @@ public class MenuTest {
     @Test(expected = InvalidOption.class)
     public void should_throw_invalid_option_with_invalid_serial_01() throws InvalidOption {
         menu.runOption("01");
+    }
+
+    @Test
+    public void should_show_proper_output_when_checking_out_books() throws InvalidOption {
+        String inputs = "Foundation\nThe Dark Forest\nFoundation\n";
+        menu.setScanner(new Scanner(inputs));
+        menu.runOption("2");
+        menu.runOption("2");
+        menu.runOption("2");
     }
 }
