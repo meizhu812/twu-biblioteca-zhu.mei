@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
 
 import java.util.Collection;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class Menu {
         this.scanner = scanner;
     }
 
-    void runOption(String input) throws InvalidOption {
+    public void runOption(String input) throws InvalidOption {
         Option<?> option = Optional.ofNullable(options.getOrDefault(input, null))
                 .orElseThrow(InvalidOption::new);
         Operation<?> operation = option.getOperation();

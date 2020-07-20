@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
+
+import com.twu.biblioteca.library.Library;
 
 public class Return extends Operation<Boolean> {
     public Return(Library library) {
@@ -11,7 +13,7 @@ public class Return extends Operation<Boolean> {
     }
 
     @Override
-    void consoleExecute(String... input) {
+    public void consoleExecute(String... input) {
         if (execute(input)) {
             System.out.println("Thank you for returning the book!");
         } else {

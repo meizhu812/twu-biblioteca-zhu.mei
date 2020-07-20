@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
+
+import com.twu.biblioteca.library.Library;
 
 public class Quit extends Operation<Boolean> {
     public Quit(Library library) {
@@ -13,7 +15,7 @@ public class Quit extends Operation<Boolean> {
     }
 
     @Override
-    void consoleExecute(String... input) {
+    public void consoleExecute(String... input) {
         if (execute()) {
             System.out.println("Thanks for using Biblioteca!");
         }

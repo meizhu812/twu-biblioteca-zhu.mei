@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.library;
 
 public class Status {
     private final Book book;

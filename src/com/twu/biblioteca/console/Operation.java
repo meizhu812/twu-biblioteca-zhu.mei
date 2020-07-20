@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
+
+import com.twu.biblioteca.library.Library;
 
 public abstract class Operation<R> {
     protected final Library library;
@@ -9,5 +11,5 @@ public abstract class Operation<R> {
 
     abstract R execute(String... input);
 
-    abstract void consoleExecute(String... input);
+    public abstract void consoleExecute(String... input);
 }

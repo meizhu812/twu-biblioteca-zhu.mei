@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.console.InvalidOption;
+import com.twu.biblioteca.console.Menu;
+
 import java.util.Scanner;
 
 public class BibliotecaApp {

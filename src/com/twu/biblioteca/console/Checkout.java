@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
+
+import com.twu.biblioteca.library.Library;
 
 public class Checkout extends Operation<Boolean> {
     public Checkout(Library library) {
@@ -11,7 +13,7 @@ public class Checkout extends Operation<Boolean> {
     }
 
     @Override
-    void consoleExecute(String... input) {
+    public void consoleExecute(String... input) {
         if (execute(input)) {
             System.out.println("Thank you! Enjoy the book!");
         } else {

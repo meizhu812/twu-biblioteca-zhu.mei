@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.console;
 
 public class Option<R> {
     private final String serial;

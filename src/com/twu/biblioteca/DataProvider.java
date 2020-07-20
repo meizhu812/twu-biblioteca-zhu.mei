@@ -1,5 +1,13 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.console.Checkout;
+import com.twu.biblioteca.console.ListAll;
+import com.twu.biblioteca.console.Option;
+import com.twu.biblioteca.console.Quit;
+import com.twu.biblioteca.console.Return;
+import com.twu.biblioteca.library.Book;
+import com.twu.biblioteca.library.Library;
+
 import java.util.Arrays;
 import java.util.List;
 
