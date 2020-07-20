@@ -15,6 +15,14 @@ public final class DataProvider {
                 new Book("Foundation", "Isaac Asimov", 2004)));
     }
 
+    public static LibraryNew provideLibraryNew() {
+        return new LibraryNew(Arrays.asList(
+                new Book("The Three-Body Problem", "Cixin Liu", 2014),
+                new Book("The Dark Forest", "Cixin Liu", 2016),
+                new Book("Death's End", "Cixin Liu", 2014),
+                new Book("Foundation", "Isaac Asimov", 2004)));
+    }
+
     public static List<Option<?>> provideOptions(Library library) {
         return Arrays.asList(
                 new Option<>("1", "List All Books", null, new ListAll(library)),
