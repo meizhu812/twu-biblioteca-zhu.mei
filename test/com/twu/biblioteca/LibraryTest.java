@@ -12,7 +12,7 @@ public class LibraryTest {
 
     @Before
     public void setUp() {
-        library = DataProvider.getLibraryInstance();
+        library = DataProvider.provideLibrary();
     }
 
     @Test

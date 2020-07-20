@@ -7,7 +7,7 @@ public final class DataProvider {
     private DataProvider() {
     }
 
-    public static Library getLibraryInstance() {
+    public static Library provideLibrary() {
         Book[] books = {
                 new Book("The Three-Body Problem", "Cixin Liu", 2014),
                 new Book("The Dark Forest", "Cixin Liu", 2016),
@@ -16,7 +16,7 @@ public final class DataProvider {
         return new Library(Arrays.asList(books));
     }
 
-    public static List<Option<?>> getMenuOptions(Library library) {
+    public static List<Option<?>> provideOptions(Library library) {
         return Arrays.asList(
                 new Option<>("1", "List All Books", null, new ListAll(library)),
                 new Option<>("2", "Checkout a book", "Please enter book title:", new Checkout<>(library)),

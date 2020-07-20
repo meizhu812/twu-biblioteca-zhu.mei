@@ -11,7 +11,7 @@ public class MenuTest {
 
     @Before
     public void setUp() {
-        menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()), new Scanner(System.in));
+        menu = new Menu(DataProvider.provideOptions(DataProvider.provideLibrary()), new Scanner(System.in));
     }
 
     @Test

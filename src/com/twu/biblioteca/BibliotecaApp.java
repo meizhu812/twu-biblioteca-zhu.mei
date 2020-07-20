@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-    private static final Scanner sc = new Scanner(System.in);
-    private static final Menu menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()), sc);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Menu menu = new Menu(DataProvider.provideOptions(DataProvider.provideLibrary()), scanner);
 
     static {
-        sc.useDelimiter("\n");
+        scanner.useDelimiter("\n");
     }
 
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class BibliotecaApp {
         while (true) {
             menu.prompt();
             try {
-                menu.runOption(sc.next());
+                menu.runOption(scanner.next());
             } catch (InvalidOption e) {
                 System.out.println("Please select a valid option!");
             }
