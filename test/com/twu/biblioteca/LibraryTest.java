@@ -38,6 +38,33 @@ public class LibraryTest {
         assertFailedCheckout("War and Peace");
     }
 
+    @Test
+    public void should_success_return_book_checked_out() {
+        assertSuccessCheckout("Foundation");
+        assertTrue(library.returnBookByTitle("Foundation"));
+    }
+
+    @Test
+    public void should_success_checkout_book_returned() {
+        assertSuccessCheckout("Foundation");
+        assertTrue(library.returnBookByTitle("Foundation"));
+        assertSuccessCheckout("Foundation");
+    }
+
+    @Test
+    public void should_fail_return_book_twice_but_success_checkout_again() {
+        assertSuccessCheckout("Foundation");
+        assertTrue(library.returnBookByTitle("Foundation"));
+        assertFalse(library.returnBookByTitle("Foundation"));
+        assertSuccessCheckout("Foundation");
+    }
+    @Test
+
+    public void should_fail_return_non_existent_books() {
+        assertFalse(library.returnBookByTitle("Harry Potter"));
+        assertFalse(library.returnBookByTitle("War and Peace"));
+    }
+
     private void assertSuccessCheckout(String title) {
         assertEquals(library.checkOutBookByTitle(title)
                 .map(Book::getTitle)

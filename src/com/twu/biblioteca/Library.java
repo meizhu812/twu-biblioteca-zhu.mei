@@ -35,4 +35,8 @@ public final class Library {
         bookOptional.ifPresent(book -> statusMap.put(book, false));
         return bookOptional;
     }
+
+    public boolean returnBookByTitle(String title) {
+        return false;
+    }
 }
