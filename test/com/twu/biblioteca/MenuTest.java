@@ -20,8 +20,8 @@ public class MenuTest {
     }
 
     @Test(expected = InvalidOption.class)
-    public void should_throw_invalid_option_with_invalid_serial_2() throws InvalidOption {
-        menu.runOption("2");
+    public void should_throw_invalid_option_with_invalid_serial_4() throws InvalidOption {
+        menu.runOption("4");
     }
 
     @Test(expected = InvalidOption.class)
