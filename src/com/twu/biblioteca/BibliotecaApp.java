@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -23,7 +22,7 @@ public class BibliotecaApp {
     @SuppressWarnings("InfiniteLoopStatement")
     private static void mainLoop() {
         while (true) {
-            showMenu();
+            menu.prompt();
             try {
                 menu.runOption(sc.next());
             } catch (InvalidOption e) {
@@ -32,10 +31,4 @@ public class BibliotecaApp {
         }
     }
 
-    private static void showMenu() {
-        System.out.println("Please select an option:");
-        menu.getOptions().entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.printf("%2s - %s\n", entry.getKey(), entry.getValue().getDescription()));
-    }
 }
