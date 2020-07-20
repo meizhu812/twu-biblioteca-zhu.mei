@@ -37,6 +37,13 @@ public final class Library {
     }
 
     public boolean returnBookByTitle(String title) {
-        return false;
+        Optional<Book> bookOptional = Optional.ofNullable(titleMap.getOrDefault(title, null))
+                .filter(book -> !statusMap.get(book));
+        if (bookOptional.isPresent()) {
+            statusMap.put(bookOptional.get(), true);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
