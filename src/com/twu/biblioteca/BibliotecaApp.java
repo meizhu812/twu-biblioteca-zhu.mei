@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     private static final Scanner sc = new Scanner(System.in);
-    private static final Menu menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()));
+    private static final Menu menu = new Menu(DataProvider.getMenuOptions(DataProvider.getLibraryInstance()), sc);
 
     public static void main(String[] args) {
         welcome();

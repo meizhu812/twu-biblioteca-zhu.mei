@@ -19,6 +19,7 @@ public final class DataProvider {
     public static List<Option<?>> getMenuOptions(Library library) {
         return Arrays.asList(
                 new Option<>("1", "List All Books", null, new ListAll(library)),
+                new Option<>("2", "Checkout a book", "Please enter book title:", new Checkout<>(library)),
                 new Option<>("Q", "Quit", null, new Quit(library)));
     }
 }

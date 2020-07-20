@@ -12,7 +12,7 @@ public class Checkout<R> extends Operation<Boolean> {
 
     @Override
     void consoleExecute(String... input) {
-        if (execute()) {
+        if (execute(input)) {
             System.out.println("Thank you! Enjoy the book!");
         } else {
             System.out.println("Sorry, that book is not available.");
