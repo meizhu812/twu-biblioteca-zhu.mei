@@ -4,34 +4,35 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class Library {
-    private final Map<String, Status> statusMap;
+    private final Map<String, Book> books;
 
     public Library(Collection<Book> initBooks) {
-        this.statusMap = initBooks.stream().collect(
-                Collectors.toMap(Book::getTitle, Status::new, (a, b) -> a));
+        this.books = initBooks.stream().collect(
+                Collectors.toMap(Book::getTitle, Function.identity(), (a, b) -> a));
     }
 
     public List<Book> getAllBooks() {
-        return statusMap.values().stream()
-                .map(Status::getBook)
+        return books.values().stream()
+                .filter(Book::isIn)
                 .collect(Collectors.toList());
     }
 
     public Optional<Book> checkOutBookByTitle(String title) {
-        Optional<Status> optionalStatus = Optional.ofNullable(statusMap.getOrDefault(title, null))
-                .filter(Status::isIn);
-        optionalStatus.ifPresent(status -> status.setIn(false));
-        return optionalStatus.map(Status::getBook);
+        Optional<Book> optionalBook = Optional.ofNullable(books.getOrDefault(title, null))
+                .filter(Book::isIn);
+        optionalBook.ifPresent(status -> status.setIn(false));
+        return optionalBook;
     }
 
     public boolean returnBookByTitle(String title) {
-        Optional<Status> optionalStatus = Optional.ofNullable(statusMap.getOrDefault(title, null))
-                .filter(status -> !status.isIn());
-        if (optionalStatus.isPresent()) {
-            optionalStatus.get().setIn(true);
+        Optional<Book> optionalBook = Optional.ofNullable(books.getOrDefault(title, null))
+                .filter(book -> !book.isIn());
+        if (optionalBook.isPresent()) {
+            optionalBook.get().setIn(true);
             return true;
         } else {
             return false;
