@@ -16,6 +16,13 @@ public class Authenticator {
     }
 
     public Optional<User> authenticate(LoginInput loginInput) {
+        Optional<User> optionalUser = Optional.ofNullable(users.getOrDefault(loginInput.getCardNo(), null));
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getPassword().equals(loginInput.getPassword())) {
+                return optionalUser;
+            }
+        }
         return Optional.empty();
     }
 }
