@@ -1,16 +1,18 @@
 package com.twu.biblioteca.console;
 
-public class Option<R> {
+import java.lang.reflect.Method;
+
+public class Option {
     private final String serial;
     private final String description;
     private final String inputPrompt;
-    private final Operation<R> operation;
+    private final Method method;
 
-    public Option(String serial, String description, String inputPrompt, Operation<R> operation) {
+    public Option(String serial, String description, String inputPrompt, Method method) {
         this.serial = serial;
         this.description = description;
         this.inputPrompt = inputPrompt;
-        this.operation = operation;
+        this.method = method;
     }
 
     public String getSerial() {
@@ -25,7 +27,7 @@ public class Option<R> {
         return inputPrompt;
     }
 
-    public Operation<R> getOperation() {
-        return operation;
+    public Method getMethod() {
+        return method;
     }
 }
