@@ -7,32 +7,32 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class Library {
-    private final Map<String, Book> books;
+public final class Library<C extends Content> {
+    private final Map<String, C> contents;
 
-    public Library(Collection<Book> initBooks) {
-        this.books = initBooks.stream().collect(
-                Collectors.toMap(Book::getTitle, Function.identity(), (a, b) -> a));
+    public Library(Collection<C> initContents) {
+        this.contents = initContents.stream().collect(
+                Collectors.toMap(C::getTitle, Function.identity(), (a, b) -> a));
     }
 
-    public List<Book> getAllBooks() {
-        return books.values().stream()
-                .filter(Book::isIn)
+    public List<C> getAllContents() {
+        return contents.values().stream()
+                .filter(C::isIn)
                 .collect(Collectors.toList());
     }
 
-    public Optional<Book> checkOutBookByTitle(String title) {
-        Optional<Book> optionalBook = Optional.ofNullable(books.getOrDefault(title, null))
-                .filter(Book::isIn);
+    public Optional<C> checkOutContentByTitle(String title) {
+        Optional<C> optionalBook = Optional.ofNullable(contents.getOrDefault(title, null))
+                .filter(C::isIn);
         optionalBook.ifPresent(status -> status.setIn(false));
         return optionalBook;
     }
 
-    public boolean returnBookByTitle(String title) {
-        Optional<Book> optionalBook = Optional.ofNullable(books.getOrDefault(title, null))
-                .filter(book -> !book.isIn());
-        if (optionalBook.isPresent()) {
-            optionalBook.get().setIn(true);
+    public boolean returnContentByTitle(String title) {
+        Optional<C> optionalContent = Optional.ofNullable(contents.getOrDefault(title, null))
+                .filter(content -> !content.isIn());
+        if (optionalContent.isPresent()) {
+            optionalContent.get().setIn(true);
             return true;
         } else {
             return false;

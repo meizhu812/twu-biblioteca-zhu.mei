@@ -9,8 +9,8 @@ public final class DataProvider {
     private DataProvider() {
     }
 
-    public static Library provideLibrary() {
-        return new Library(Arrays.asList(
+    public static Library<Book> provideBookLibrary() {
+        return new Library<>(Arrays.asList(
                 new Book("The Three-Body Problem", "Cixin Liu", 2014),
                 new Book("The Dark Forest", "Cixin Liu", 2016),
                 new Book("Death's End", "Cixin Liu", 2014),

@@ -9,16 +9,16 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 
 public class LibraryTest {
-    private Library library;
+    private Library<Book> bookLibrary;
 
     @Before
     public void setUp() {
-        library = DataProvider.provideLibrary();
+        bookLibrary = DataProvider.provideBookLibrary();
     }
 
     @Test
     public void should_get_all_books() {
-        assertEquals(library.getAllBooks().size(), 4);
+        assertEquals(bookLibrary.getAllContents().size(), 4);
     }
 
     @Test
@@ -42,39 +42,39 @@ public class LibraryTest {
     @Test
     public void should_success_return_book_checked_out() {
         assertSuccessCheckout("Foundation");
-        assertTrue(library.returnBookByTitle("Foundation"));
+        assertTrue(bookLibrary.returnContentByTitle("Foundation"));
     }
 
     @Test
     public void should_success_checkout_book_returned() {
         assertSuccessCheckout("Foundation");
-        assertTrue(library.returnBookByTitle("Foundation"));
+        assertTrue(bookLibrary.returnContentByTitle("Foundation"));
         assertSuccessCheckout("Foundation");
     }
 
     @Test
     public void should_fail_return_book_twice_but_success_checkout_again() {
         assertSuccessCheckout("Foundation");
-        assertTrue(library.returnBookByTitle("Foundation"));
-        assertFalse(library.returnBookByTitle("Foundation"));
+        assertTrue(bookLibrary.returnContentByTitle("Foundation"));
+        assertFalse(bookLibrary.returnContentByTitle("Foundation"));
         assertSuccessCheckout("Foundation");
     }
     @Test
 
     public void should_fail_return_non_existent_books() {
-        assertFalse(library.returnBookByTitle("Harry Potter"));
-        assertFalse(library.returnBookByTitle("War and Peace"));
+        assertFalse(bookLibrary.returnContentByTitle("Harry Potter"));
+        assertFalse(bookLibrary.returnContentByTitle("War and Peace"));
     }
 
     private void assertSuccessCheckout(String title) {
-        assertEquals(library.checkOutBookByTitle(title)
-                .map(Book::getTitle)
+        assertEquals(bookLibrary.checkOutContentByTitle(title)
+                .map(Content::getTitle)
                 .orElse(""), title);
     }
 
     private void assertFailedCheckout(String title) {
-        assertNotEquals(library.checkOutBookByTitle(title)
-                .map(Book::getTitle)
+        assertNotEquals(bookLibrary.checkOutContentByTitle(title)
+                .map(Content::getTitle)
                 .orElse(""), title);
     }
 }

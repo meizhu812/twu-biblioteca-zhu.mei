@@ -1,5 +1,6 @@
 package com.twu.biblioteca.console;
 
+import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Library;
 
 import java.io.PrintStream;
@@ -14,13 +15,12 @@ import java.util.stream.Collectors;
 public class Console {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printer = System.out;
-    private final Library library;
+    private final Library<Book> bookLibrary;
     private final Map<String, Option> options;
 
-
-    public Console(Library library) {
+    public Console(Library<Book> bookLibrary) {
         scanner.useDelimiter("\n");
-        this.library = library;
+        this.bookLibrary = bookLibrary;
         options = Arrays.stream(getClass().getDeclaredMethods())
                 .filter(method -> method.getAnnotation(MenuItem.class) != null)
                 .collect(Collectors.toMap(
@@ -83,12 +83,12 @@ public class Console {
         final String ENTRY_FORMAT = "- %-32s | %-16s | %16s\n";
         printer.println("= Listing all books in Biblioteca:");
         printer.printf(ENTRY_FORMAT, "-TITLE-", "-AUTHOR-", "-PUBLISH YEAR-");
-        library.getAllBooks().forEach(book -> System.out.printf(ENTRY_FORMAT, book.getTitle(), book.getAuthor(), book.getPubYear()));
+        bookLibrary.getAllContents().forEach(book -> System.out.printf(ENTRY_FORMAT, book.getTitle(), book.getAuthor(), book.getPubYear()));
     }
 
     @MenuItem(serial = "2", desc = "Checkout a book", prompt = "Please enter book title:")
     private void checkoutBook(String title) {
-        if (library.checkOutBookByTitle(title).isPresent()) {
+        if (bookLibrary.checkOutContentByTitle(title).isPresent()) {
             printer.println("Thank you! Enjoy the book!");
         } else {
             printer.println("Sorry, that book is not available.");
@@ -97,7 +97,7 @@ public class Console {
 
     @MenuItem(serial = "3", desc = "Return a book", prompt = "Please enter book title:")
     private void returnBook(String title) {
-        if (library.returnBookByTitle(title)) {
+        if (bookLibrary.returnContentByTitle(title)) {
             printer.println("Thank you for returning the book!");
         } else {
             printer.println("That is not a valid book to return.");
