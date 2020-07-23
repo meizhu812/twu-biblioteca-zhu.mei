@@ -15,14 +15,9 @@ public class Authenticator {
                         User::getCardNo, Function.identity(), (a, b) -> a));
     }
 
-    public Optional<User> authenticate(LoginInput loginInput) {
-        Optional<User> optionalUser = Optional.ofNullable(users.getOrDefault(loginInput.getCardNo(), null));
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            if (user.getPassword().equals(loginInput.getPassword())) {
-                return optionalUser;
-            }
-        }
-        return Optional.empty();
+    public User authenticate(LoginInput loginInput) throws InvalidCredential {
+        return Optional.ofNullable(users.getOrDefault(loginInput.getCardNo(), null))
+                .filter(user -> user.getPassword().equals(loginInput.getPassword()))
+                .orElseThrow(InvalidCredential::new);
     }
 }

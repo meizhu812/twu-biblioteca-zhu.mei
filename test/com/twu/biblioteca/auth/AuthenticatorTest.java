@@ -16,18 +16,21 @@ public class AuthenticatorTest {
     }
 
     @Test
-    public void should_success_login_with_correct_username_and_password() {
+    public void should_success_login_with_correct_username_and_password() throws InvalidCredential {
         LoginInput loginInputA = new LoginInput("001-0001", "passwordA");
         LoginInput loginInputB = new LoginInput("001-0002", "passwordB");
-        assertNotNull(authenticator.authenticate(loginInputA).orElse(null));
-        assertNotNull(authenticator.authenticate(loginInputB).orElse(null));
+        assertNotNull(authenticator.authenticate(loginInputA));
+        assertNotNull(authenticator.authenticate(loginInputB));
     }
 
-    @Test
-    public void should_success_login_with_incorrect_username_or_password() {
+    @Test(expected = InvalidCredential.class)
+    public void should_success_login_with_incorrect_password() throws InvalidCredential {
         LoginInput loginInputA = new LoginInput("001-0001", "passwordB");
+        assertNull(authenticator.authenticate(loginInputA));
+    }
+    @Test(expected = InvalidCredential.class)
+    public void should_success_login_with_incorrect_username() throws InvalidCredential {
         LoginInput loginInputB = new LoginInput("001-0003", "passwordB");
-        assertNull(authenticator.authenticate(loginInputA).orElse(null));
-        assertNull(authenticator.authenticate(loginInputB).orElse(null));
+        assertNull(authenticator.authenticate(loginInputB));
     }
 }
