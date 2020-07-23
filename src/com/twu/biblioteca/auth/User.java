@@ -1,16 +1,16 @@
 package com.twu.biblioteca.auth;
 
 public class User {
-    private String username;
+    private String cardNo;
     private String password;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String cardNo, String password) {
+        this.cardNo = cardNo;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCardNo() {
+        return cardNo;
     }
 
     public String getPassword() {

@@ -29,7 +29,7 @@ public final class DataProvider {
 
     public static List<User> provideUsers() {
         return Arrays.asList(
-                new User("Amy", "passwordA"),
-                new User("Bob", "passwordB"));
+                new User("001-0001", "passwordA"),
+                new User("001-0002", "passwordB"));
     }
 }

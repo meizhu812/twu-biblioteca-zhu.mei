@@ -12,7 +12,7 @@ public class Authenticator {
     public Authenticator(Collection<User> users) {
         this.users = users.stream()
                 .collect(Collectors.toMap(
-                        User::getUsername, Function.identity(), (a, b) -> a));
+                        User::getCardNo, Function.identity(), (a, b) -> a));
     }
 
     public Optional<User> authenticate(LoginInput loginInput) {
