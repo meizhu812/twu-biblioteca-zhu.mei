@@ -10,10 +10,12 @@ import static org.junit.Assert.assertFalse;
 
 public class LibraryTest {
     private Library<Book> bookLibrary;
+    private Library<Film> filmLibrary;
 
     @Before
     public void setUp() {
         bookLibrary = DataProvider.provideBookLibrary();
+        filmLibrary = DataProvider.provideFilmLibrary();
     }
 
     @Test
@@ -59,8 +61,8 @@ public class LibraryTest {
         assertFalse(bookLibrary.returnContentByTitle("Foundation"));
         assertSuccessCheckout("Foundation");
     }
-    @Test
 
+    @Test
     public void should_fail_return_non_existent_books() {
         assertFalse(bookLibrary.returnContentByTitle("Harry Potter"));
         assertFalse(bookLibrary.returnContentByTitle("War and Peace"));
@@ -76,5 +78,10 @@ public class LibraryTest {
         assertNotEquals(bookLibrary.checkOutContentByTitle(title)
                 .map(Content::getTitle)
                 .orElse(""), title);
+    }
+
+    @Test
+    public void should_get_all_films() {
+        assertEquals(filmLibrary.getAllContents().size(), 3);
     }
 }
