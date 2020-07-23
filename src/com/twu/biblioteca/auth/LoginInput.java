@@ -1,16 +1,16 @@
 package com.twu.biblioteca.auth;
 
 public class LoginInput {
-    private final String username;
+    private final String cardNo;
     private final String password;
 
-    public LoginInput(String username, String password) {
-        this.username = username;
+    public LoginInput(String cardNo, String password) {
+        this.cardNo = cardNo;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCardNo() {
+        return cardNo;
     }
 
     public String getPassword() {
