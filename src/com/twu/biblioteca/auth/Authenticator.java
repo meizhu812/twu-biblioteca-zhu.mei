@@ -26,6 +26,6 @@ public class Authenticator {
     }
 
     public UserInfo getUserInfoByUser(User user) {
-        return null;
+        return userInfo.get(user.getCardNo());
     }
 }
