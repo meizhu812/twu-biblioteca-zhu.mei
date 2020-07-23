@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.auth.User;
+import com.twu.biblioteca.auth.UserInfo;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
@@ -31,5 +32,11 @@ public final class DataProvider {
         return Arrays.asList(
                 new User("001-0001", "passwordA"),
                 new User("001-0002", "passwordB"));
+    }
+
+    public static List<UserInfo> provideUserInfo() {
+        return Arrays.asList(
+                new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
+                new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002"));
     }
 }
