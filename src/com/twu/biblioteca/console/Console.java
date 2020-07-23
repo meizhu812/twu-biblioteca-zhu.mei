@@ -1,6 +1,7 @@
 package com.twu.biblioteca.console;
 
 import com.twu.biblioteca.library.Book;
+import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
 
 import java.io.PrintStream;
@@ -16,11 +17,13 @@ public class Console {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printer = System.out;
     private final Library<Book> bookLibrary;
+    private final Library<Film> filmLibrary;
     private final Map<String, Option> options;
 
-    public Console(Library<Book> bookLibrary) {
+    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary) {
         scanner.useDelimiter("\n");
         this.bookLibrary = bookLibrary;
+        this.filmLibrary = filmLibrary;
         options = Arrays.stream(getClass().getDeclaredMethods())
                 .filter(method -> method.getAnnotation(MenuItem.class) != null)
                 .collect(Collectors.toMap(
@@ -102,6 +105,14 @@ public class Console {
         } else {
             printer.println("That is not a valid book to return.");
         }
+    }
+
+    @MenuItem(serial = "4", desc = "List All Films", prompt = "")
+    private void listAllFilms() {
+        final String ENTRY_FORMAT = "- %-32s | %-32s | %-8s |%-16s\n";
+        printer.println("= Listing all films in Biblioteca:");
+        printer.printf(ENTRY_FORMAT, "-TITLE-", "-Director-", "-YEAR-", "-RATING-");
+        filmLibrary.getAllContents().forEach(film -> System.out.printf(ENTRY_FORMAT, film.getTitle(), film.getDirector(), film.getYear(), film.getRating()));
     }
 
     @MenuItem(serial = "Q", desc = "Quit", prompt = "")
