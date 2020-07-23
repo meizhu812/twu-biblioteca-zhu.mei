@@ -1,5 +1,9 @@
 package com.twu.biblioteca.console;
 
+import com.twu.biblioteca.auth.Authenticator;
+import com.twu.biblioteca.auth.LoginInput;
+import com.twu.biblioteca.auth.User;
+import com.twu.biblioteca.auth.InvalidCredential;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
@@ -18,12 +22,15 @@ public class Console {
     private final PrintStream printer = System.out;
     private final Library<Book> bookLibrary;
     private final Library<Film> filmLibrary;
+    private final Authenticator authenticator;
+    private User currentUser;
     private final Map<String, Option> options;
 
-    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary) {
+    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator) {
         scanner.useDelimiter("\n");
         this.bookLibrary = bookLibrary;
         this.filmLibrary = filmLibrary;
+        this.authenticator = authenticator;
         options = Arrays.stream(getClass().getDeclaredMethods())
                 .filter(method -> method.getAnnotation(MenuItem.class) != null)
                 .collect(Collectors.toMap(
@@ -34,6 +41,14 @@ public class Console {
 
     public void run() {
         welcome();
+        while (true) {
+            try {
+                verifyLogin();
+                break;
+            } catch (InvalidCredential e) {
+                printer.println("Wrong credential.");
+            }
+        }
         while (true) {
             showOptions();
             try {
@@ -55,6 +70,14 @@ public class Console {
 
     private void welcome() {
         printer.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
+    }
+
+    private void verifyLogin() throws InvalidCredential {
+        printer.println("Please enter your card number:");
+        String cardNo = scanner.next();
+        printer.println("Please enter your password:");
+        String password = scanner.next();
+        currentUser = authenticator.authenticate(new LoginInput(cardNo, password));
     }
 
     private void showOptions() {
