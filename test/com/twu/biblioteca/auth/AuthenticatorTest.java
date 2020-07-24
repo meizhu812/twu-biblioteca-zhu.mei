@@ -11,7 +11,7 @@ public class AuthenticatorTest {
 
     @Before
     public void setUp() {
-        authenticator = new Authenticator(DataProvider.provideUsers(), DataProvider.provideUserInfo());
+        authenticator = new TestAuthenticator(DataProvider.provideUsers(), DataProvider.provideUserInfo());
     }
 
     @Test
