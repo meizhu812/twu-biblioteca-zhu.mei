@@ -3,7 +3,10 @@ package com.twu.biblioteca.console;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class ConsoleUtil {
+public final class ConsoleUtil {
+    private ConsoleUtil() {
+    }
+
     public static Option methodToOption(Method method) {
         MenuItem annotation = getMenuItemAnno(method);
         return new Option(annotation.serial(), annotation.desc(), annotation.prompt(), method);
