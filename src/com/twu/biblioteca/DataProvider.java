@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.auth.Authenticator;
+import com.twu.biblioteca.auth.TestAuthenticator;
 import com.twu.biblioteca.auth.User;
 import com.twu.biblioteca.auth.UserInfo;
 import com.twu.biblioteca.library.Book;
@@ -8,7 +10,6 @@ import com.twu.biblioteca.library.Library;
 import com.twu.biblioteca.library.TestLibrary;
 
 import java.util.Arrays;
-import java.util.List;
 
 public final class DataProvider {
     private DataProvider() {
@@ -29,15 +30,14 @@ public final class DataProvider {
                 new Film("The Dark Knight Rises", 2012, "Christopher Nolan", 8)));
     }
 
-    public static List<User> provideUsers() {
-        return Arrays.asList(
-                new User("001-0001", "passwordA"),
-                new User("001-0002", "passwordB"));
-    }
-
-    public static List<UserInfo> provideUserInfo() {
-        return Arrays.asList(
-                new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
-                new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002"));
+    public static Authenticator provideAuthenticator()
+    {
+        return new TestAuthenticator(
+                Arrays.asList(
+                        new User("001-0001", "passwordA"),
+                        new User("001-0002", "passwordB")),
+                Arrays.asList(
+                        new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
+                        new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002")));
     }
 }
