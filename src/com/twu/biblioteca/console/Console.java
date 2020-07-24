@@ -1,10 +1,7 @@
 package com.twu.biblioteca.console;
 
 import com.twu.biblioteca.ConsoleUtil;
-import com.twu.biblioteca.auth.Authenticator;
-import com.twu.biblioteca.auth.LoginInput;
-import com.twu.biblioteca.auth.User;
-import com.twu.biblioteca.auth.InvalidCredential;
+import com.twu.biblioteca.auth.*;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
@@ -102,6 +99,17 @@ public class Console {
     /*
     Menu Options
     */
+
+    @MenuItem(serial = "0", desc = "Show User Info", prompt = "")
+    private void showUserInfo() {
+        UserInfo userInfo = authenticator.getUserInfoByUser(currentUser);
+        final String INFO_FORMAT = "- %-16s: %32s\n";
+        printer.println("= User Info =");
+        printer.printf(INFO_FORMAT, "Card Number", userInfo.getCardNo());
+        printer.printf(INFO_FORMAT, "Name", userInfo.getName());
+        printer.printf(INFO_FORMAT, "EMail", userInfo.getEmail());
+        printer.printf(INFO_FORMAT, "Phone Number", userInfo.getPhoneNo());
+    }
 
     @MenuItem(serial = "1", desc = "List All Books", prompt = "")
     private void listAllBooks() {
