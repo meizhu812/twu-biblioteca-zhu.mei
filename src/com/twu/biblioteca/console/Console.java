@@ -1,7 +1,10 @@
 package com.twu.biblioteca.console;
 
-import com.twu.biblioteca.ConsoleUtil;
-import com.twu.biblioteca.auth.*;
+import com.twu.biblioteca.auth.Authenticator;
+import com.twu.biblioteca.auth.InvalidCredential;
+import com.twu.biblioteca.auth.LoginInput;
+import com.twu.biblioteca.auth.User;
+import com.twu.biblioteca.auth.UserInfo;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;

@@ -1,7 +1,4 @@
-package com.twu.biblioteca;
-
-import com.twu.biblioteca.console.MenuItem;
-import com.twu.biblioteca.console.Option;
+package com.twu.biblioteca.console;
 
 import java.lang.reflect.Method;
 import java.util.Map;
