@@ -2,8 +2,10 @@ package com.twu.biblioteca.auth;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class TestAuthenticator implements Authenticator {
@@ -21,8 +23,9 @@ public class TestAuthenticator implements Authenticator {
 
     @Override
     public User authenticate(LoginInput loginInput) throws InvalidCredential {
+        Predicate<User> hasSamePassword = user -> Objects.equals(loginInput.getPassword(), user.getPassword());
         return Optional.ofNullable(users.getOrDefault(loginInput.getCardNo(), null))
-                .filter(user -> user.getPassword().equals(loginInput.getPassword()))
+                .filter(hasSamePassword)
                 .orElseThrow(InvalidCredential::new);
     }
 

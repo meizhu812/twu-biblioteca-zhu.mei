@@ -1,5 +1,6 @@
 package com.twu.biblioteca.console;
 
+import com.twu.biblioteca.ConsoleUtil;
 import com.twu.biblioteca.auth.Authenticator;
 import com.twu.biblioteca.auth.LoginInput;
 import com.twu.biblioteca.auth.User;
@@ -23,8 +24,8 @@ public class Console {
     private final Library<Book> bookLibrary;
     private final Library<Film> filmLibrary;
     private final Authenticator authenticator;
-    private User currentUser;
     private final Map<String, Option> options;
+    private User currentUser;
 
     public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator) {
         scanner.useDelimiter("\n");
@@ -32,15 +33,24 @@ public class Console {
         this.filmLibrary = filmLibrary;
         this.authenticator = authenticator;
         options = Arrays.stream(getClass().getDeclaredMethods())
-                .filter(method -> method.getAnnotation(MenuItem.class) != null)
+                .filter(method -> ConsoleUtil.getMenuItemAnno(method) != null)
                 .collect(Collectors.toMap(
-                        method -> getAnnotation(method).serial(),
-                        this::methodToOption,
+                        method -> ConsoleUtil.getMenuItemAnno(method).serial(),
+                        ConsoleUtil::methodToOption,
                         (a, b) -> a));
     }
 
     public void run() {
         welcome();
+        login();
+        main();
+    }
+
+    private void welcome() {
+        printer.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
+    }
+
+    private void login() {
         while (true) {
             try {
                 verifyLogin();
@@ -49,42 +59,28 @@ public class Console {
                 printer.println("Wrong credential.");
             }
         }
-        while (true) {
-            showOptions();
-            try {
-                runOption(scanner.next());
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private Option methodToOption(Method method) {
-        MenuItem annotation = method.getAnnotation(MenuItem.class);
-        return new Option(annotation.serial(), annotation.desc(), annotation.prompt(), method);
-    }
-
-    private MenuItem getAnnotation(Method method) {
-        return method.getAnnotation(MenuItem.class);
-    }
-
-    private void welcome() {
-        printer.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
     }
 
     private void verifyLogin() throws InvalidCredential {
-        printer.println("Please enter your card number:");
-        String cardNo = scanner.next();
-        printer.println("Please enter your password:");
-        String password = scanner.next();
+        String cardNo = inputWithPrompt("Please enter your card number:");
+        String password = inputWithPrompt("Please enter your password:");
         currentUser = authenticator.authenticate(new LoginInput(cardNo, password));
     }
 
-    private void showOptions() {
-        printer.println("Please select an option:");
-        options.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> printer.printf("%2s - %s\n", entry.getKey(), entry.getValue().getDescription()));
+    private String inputWithPrompt(String prompt) {
+        printer.println(prompt);
+        return scanner.next();
+    }
+
+    private void main() {
+        while (true) {
+            try {
+                runOption(inputWithPrompt(ConsoleUtil.getOptionsPrompt(options)));
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
     }
 
     private void runOption(String serial) throws InvocationTargetException, IllegalAccessException {
@@ -98,11 +94,14 @@ public class Console {
             if (prompt.equals("")) {
                 method.invoke(this);
             } else {
-                printer.println(prompt);
-                method.invoke(this, scanner.next());
+                method.invoke(this, inputWithPrompt(prompt));
             }
         }
     }
+
+    /*
+    Menu Options
+    */
 
     @MenuItem(serial = "1", desc = "List All Books", prompt = "")
     private void listAllBooks() {
