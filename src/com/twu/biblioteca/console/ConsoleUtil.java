@@ -8,11 +8,11 @@ public final class ConsoleUtil {
     }
 
     public static Option methodToOption(Method method) {
-        MenuItem annotation = getMenuItemAnno(method);
+        MenuItem annotation = getMenuItem(method);
         return new Option(annotation.serial(), annotation.desc(), annotation.prompt(), method);
     }
 
-    public static MenuItem getMenuItemAnno(Method method) {
+    public static MenuItem getMenuItem(Method method) {
         return method.getAnnotation(MenuItem.class);
     }
 

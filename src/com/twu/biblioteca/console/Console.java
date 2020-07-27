@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class Console {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printer = System.out;
@@ -25,6 +26,7 @@ public class Console {
     private final Library<Film> filmLibrary;
     private final Authenticator authenticator;
     private final Map<String, Option> options;
+    private final String optionsPrompt;
     private User currentUser;
 
     public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator) {
@@ -33,11 +35,12 @@ public class Console {
         this.filmLibrary = filmLibrary;
         this.authenticator = authenticator;
         options = Arrays.stream(getClass().getDeclaredMethods())
-                .filter(method -> ConsoleUtil.getMenuItemAnno(method) != null)
+                .filter(method -> ConsoleUtil.getMenuItem(method) != null)
                 .collect(Collectors.toMap(
-                        method -> ConsoleUtil.getMenuItemAnno(method).serial(),
+                        method -> ConsoleUtil.getMenuItem(method).serial(),
                         ConsoleUtil::methodToOption,
                         (a, b) -> a));
+        optionsPrompt = ConsoleUtil.getOptionsPrompt(options);
     }
 
     public void run() {
@@ -75,7 +78,7 @@ public class Console {
     private void main() {
         while (true) {
             try {
-                runOption(inputWithPrompt(ConsoleUtil.getOptionsPrompt(options)));
+                runOption(inputWithPrompt(optionsPrompt));
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
                 break;
@@ -145,7 +148,9 @@ public class Console {
         final String ENTRY_FORMAT = "- %-32s | %-32s | %-8s |%-16s\n";
         printer.println("= Listing all films in Biblioteca:");
         printer.printf(ENTRY_FORMAT, "-TITLE-", "-Director-", "-YEAR-", "-RATING-");
-        filmLibrary.getAllContents().forEach(film -> System.out.printf(ENTRY_FORMAT, film.getTitle(), film.getDirector(), film.getYear(), film.getRating()));
+        filmLibrary.getAllContents()
+                .forEach(film -> System.out.printf(
+                        ENTRY_FORMAT, film.getTitle(), film.getDirector(), film.getYear(), film.getRating()));
     }
 
     @MenuItem(serial = "5", desc = "Checkout a film", prompt = "Please enter book title:")
