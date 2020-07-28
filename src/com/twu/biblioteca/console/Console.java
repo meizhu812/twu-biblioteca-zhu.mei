@@ -1,10 +1,6 @@
 package com.twu.biblioteca.console;
 
-import com.twu.biblioteca.auth.Authenticator;
-import com.twu.biblioteca.auth.InvalidCredential;
-import com.twu.biblioteca.auth.LoginInput;
-import com.twu.biblioteca.auth.User;
-import com.twu.biblioteca.auth.UserInfo;
+import com.twu.biblioteca.user.*;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
@@ -25,15 +21,17 @@ public class Console {
     private final Library<Book> bookLibrary;
     private final Library<Film> filmLibrary;
     private final Authenticator authenticator;
+    private final UserDB userDB;
     private final Map<String, Option> options;
     private final String optionsPrompt;
     private User currentUser;
 
-    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator) {
+    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator, UserDB userDB) {
         scanner.useDelimiter("\n");
         this.bookLibrary = bookLibrary;
         this.filmLibrary = filmLibrary;
         this.authenticator = authenticator;
+        this.userDB = userDB;
         options = Arrays.stream(getClass().getDeclaredMethods())
                 .filter(method -> ConsoleUtil.getMenuItem(method) != null)
                 .collect(Collectors.toMap(
@@ -108,7 +106,7 @@ public class Console {
 
     @MenuItem(serial = "0", desc = "Show User Info", prompt = "")
     private void showUserInfo() {
-        UserInfo userInfo = authenticator.getUserInfoByUser(currentUser);
+        UserInfo userInfo = userDB.getUserInfoByUser(currentUser);
         final String INFO_FORMAT = "- %-16s: %32s\n";
         printer.println("= User Info =");
         printer.printf(INFO_FORMAT, "Card Number", userInfo.getCardNo());

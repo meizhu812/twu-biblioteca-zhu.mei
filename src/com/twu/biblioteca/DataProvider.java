@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.auth.Authenticator;
-import com.twu.biblioteca.auth.TestAuthenticator;
-import com.twu.biblioteca.auth.User;
-import com.twu.biblioteca.auth.UserInfo;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
 import com.twu.biblioteca.library.Library;
 import com.twu.biblioteca.library.TestLibrary;
+import com.twu.biblioteca.user.Authenticator;
+import com.twu.biblioteca.user.TestAuthenticator;
+import com.twu.biblioteca.user.TestUserDB;
+import com.twu.biblioteca.user.User;
+import com.twu.biblioteca.user.UserDB;
+import com.twu.biblioteca.user.UserInfo;
 
 import java.util.Arrays;
 
@@ -30,14 +32,16 @@ public final class DataProvider {
                 new Film("The Dark Knight Rises", 2012, "Christopher Nolan", 8)));
     }
 
-    public static Authenticator provideAuthenticator()
-    {
+    public static Authenticator provideAuthenticator() {
         return new TestAuthenticator(
                 Arrays.asList(
                         new User("001-0001", "passwordA"),
-                        new User("001-0002", "passwordB")),
-                Arrays.asList(
-                        new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
-                        new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002")));
+                        new User("001-0002", "passwordB")));
+    }
+
+    public static UserDB provideUserDB() {
+        return new TestUserDB(Arrays.asList(
+                new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
+                new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002")));
     }
 }

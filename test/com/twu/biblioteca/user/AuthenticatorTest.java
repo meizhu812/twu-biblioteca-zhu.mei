@@ -1,4 +1,4 @@
-package com.twu.biblioteca.auth;
+package com.twu.biblioteca.user;
 
 import com.twu.biblioteca.DataProvider;
 import org.junit.Before;
@@ -34,11 +34,5 @@ public class AuthenticatorTest {
     public void should_success_login_with_incorrect_username() throws InvalidCredential {
         LoginInput loginInputB = new LoginInput("001-0003", "passwordB");
         assertNull(authenticator.authenticate(loginInputB));
-    }
-
-    @Test
-    public void should_fetch_user_info_of_user() throws InvalidCredential {
-        User amy = authenticator.authenticate(new LoginInput("001-0001", "passwordA"));
-        assertEquals("Amy", authenticator.getUserInfoByUser(amy).getName());
     }
 }

@@ -1,7 +1,5 @@
-package com.twu.biblioteca.auth;
+package com.twu.biblioteca.user;
 
 public interface Authenticator {
     User authenticate(LoginInput loginInput) throws InvalidCredential;
-
-    UserInfo getUserInfoByUser(User user);
 }

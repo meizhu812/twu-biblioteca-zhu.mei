@@ -1,4 +1,4 @@
-package com.twu.biblioteca.auth;
+package com.twu.biblioteca.user;
 
 public class InvalidCredential extends Exception {
 }

@@ -7,7 +7,8 @@ public class BibliotecaApp {
         Console console = new Console(
                 DataProvider.provideBookLibrary(),
                 DataProvider.provideFilmLibrary(),
-                DataProvider.provideAuthenticator());
+                DataProvider.provideAuthenticator(),
+                DataProvider.provideUserDB());
         console.run();
     }
 }

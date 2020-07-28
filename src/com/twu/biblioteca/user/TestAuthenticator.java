@@ -1,4 +1,4 @@
-package com.twu.biblioteca.auth;
+package com.twu.biblioteca.user;
 
 import java.util.Collection;
 import java.util.Map;
@@ -10,15 +10,13 @@ import java.util.stream.Collectors;
 
 public class TestAuthenticator implements Authenticator {
     private final Map<String, User> users;
-    private final Map<String, UserInfo> userInfo;
 
-    public TestAuthenticator(Collection<User> users, Collection<UserInfo> userInfo) {
+
+    public TestAuthenticator(Collection<User> users) {
         this.users = users.stream()
                 .collect(Collectors.toMap(
                         User::getCardNo, Function.identity(), (a, b) -> a));
-        this.userInfo = userInfo.stream()
-                .collect(Collectors.toMap(
-                        UserInfo::getCardNo, Function.identity(), (a, b) -> a));
+
     }
 
     @Override
@@ -29,8 +27,4 @@ public class TestAuthenticator implements Authenticator {
                 .orElseThrow(InvalidCredential::new);
     }
 
-    @Override
-    public UserInfo getUserInfoByUser(User user) {
-        return userInfo.get(user.getCardNo());
-    }
 }
