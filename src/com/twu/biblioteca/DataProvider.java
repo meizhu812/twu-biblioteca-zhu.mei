@@ -44,4 +44,13 @@ public final class DataProvider {
                 new UserInfo("001-0001", "Amy", "amy@tw.com", "13100000001"),
                 new UserInfo("001-0002", "Bob", "bob@tw.com", "13200000002")));
     }
+
+    public static Biblioteca provideBiblioteca() {
+        return new TestBiblioteca(
+                provideBookLibrary(),
+                provideFilmLibrary(),
+                provideAuthenticator(),
+                provideUserDB()
+        );
+    }
 }

@@ -1,5 +1,6 @@
 package com.twu.biblioteca.console;
 
+import com.twu.biblioteca.Biblioteca;
 import com.twu.biblioteca.user.*;
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Film;
@@ -26,12 +27,12 @@ public class Console {
     private final String optionsPrompt;
     private User currentUser;
 
-    public Console(Library<Book> bookLibrary, Library<Film> filmLibrary, Authenticator authenticator, UserDB userDB) {
+    public Console(Biblioteca biblioteca) {
         scanner.useDelimiter("\n");
-        this.bookLibrary = bookLibrary;
-        this.filmLibrary = filmLibrary;
-        this.authenticator = authenticator;
-        this.userDB = userDB;
+        this.bookLibrary = biblioteca.getBookLibrary();
+        this.filmLibrary = biblioteca.getFilmLibrary();
+        this.authenticator = biblioteca.getAuthenticator();
+        this.userDB = biblioteca.getUserDB();
         options = Arrays.stream(getClass().getDeclaredMethods())
                 .filter(method -> ConsoleUtil.getMenuItem(method) != null)
                 .collect(Collectors.toMap(
