@@ -152,7 +152,7 @@ public class Console {
                         ENTRY_FORMAT, film.getTitle(), film.getDirector(), film.getYear(), film.getRating()));
     }
 
-    @MenuItem(serial = "5", desc = "Checkout a film", prompt = "Please enter book title:")
+    @MenuItem(serial = "5", desc = "Checkout a film", prompt = "Please enter film title:")
     private void checkoutFilm(String title) {
         if (filmLibrary.checkOutContentByTitle(title).isPresent()) {
             printer.println("Thank you! Enjoy the film!");
