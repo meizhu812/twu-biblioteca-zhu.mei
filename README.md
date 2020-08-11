@@ -1,6 +1,6 @@
 ![Java CI with Gradle](https://github.com/meizhu812/twu-biblioteca-zhu.mei/workflows/Java%20CI%20with%20Gradle/badge.svg)
 
-[![CircleCI](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/circleci-project-setup)
+[![CircleCI](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/master.svg?style=svg)](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/master)
 
 Instructions to push your code to code.google.com
 =================================================
