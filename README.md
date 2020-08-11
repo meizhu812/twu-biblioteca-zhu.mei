@@ -1,5 +1,7 @@
 ![Java CI with Gradle](https://github.com/meizhu812/twu-biblioteca-zhu.mei/workflows/Java%20CI%20with%20Gradle/badge.svg)
 
+[![CircleCI](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/circleci-project-setup)
+
 Instructions to push your code to code.google.com
 =================================================
 1. Sign into GitHub and create a new repository
