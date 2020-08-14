@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/master.svg?style=svg)](https://circleci.com/gh/meizhu812/twu-biblioteca-zhu.mei/tree/master)
 
+[![Build Status](https://travis-ci.com/meizhu812/twu-biblioteca-zhu.mei.svg?branch=master)](https://travis-ci.com/meizhu812/twu-biblioteca-zhu.mei)
+
 Instructions to push your code to code.google.com
 =================================================
 1. Sign into GitHub and create a new repository
