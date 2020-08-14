@@ -1,3 +1,10 @@
 language: java
+
 before_install:
  - chmod +x gradlew
+install: skip
+
+jdk: oraclejdk8
+
+script:
+  - ./gradlew build --scan -s
